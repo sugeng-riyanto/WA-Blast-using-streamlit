@@ -8,6 +8,7 @@ display.start()
 # Now you can import your modules
 import pywhatkit as kit
 import pyautogui as pg
+import mouseinfo
 # Your Streamlit code
 import streamlit as st
 
@@ -250,6 +251,7 @@ def main():
 
     # Add link to download template Excel file
     st.markdown("[Download Template Excel file](https://drive.google.com/drive/folders/1Pnpmacr7n3rS1Uht8eUI8A75KFrSA7rt?usp=sharing)")
+display.stop()
 
 if __name__ == '__main__':
     main()
