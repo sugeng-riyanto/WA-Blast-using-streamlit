@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import smtplib
@@ -9,7 +10,7 @@ import time
 import warnings
 import webbrowser
 import pyautogui
-import os
+
 
 
 # Suppress specific warnings
@@ -46,47 +47,48 @@ def send_whatsapp_messages(data, announcement=False, invoice=False, proof_paymen
         if announcement:
             message = f"""
             Kepada Yth. Orang Tua/Wali Murid *{row['Nama_Siswa']}*,
-            Kami hendak menyampaikan info mengenai:
-            *Subject:* {row['Subject']}
-            *Description:* {row['Description']}
-            *Link:* {row['Link']}
-            Terima kasih atas kerjasamanya.
-            Admin Sekolah
+Kami hendak menyampaikan info mengenai:
+ • *Subject:* {row['Subject']}
+ • *Description:* {row['Description']}
+ • *Link:* {row['Link']}
+Terima kasih atas kerjasamanya.
+Admin Sekolah
             
-            Jika ada pertanyaan atau hendak konfirmasi dapat menghubungi:
-            • Ibu Penna (Kasir): https://bit.ly/mspennashb
-            • Bapak Supatmin (Admin SMP & SMA): https://bit.ly/wamrsupatminshb4
-            """
+Jika ada pertanyaan atau hendak konfirmasi dapat menghubungi:
+ • Ibu Penna (Kasir): https://bit.ly/mspennashb
+ • Bapak Supatmin (Admin SMP & SMA): https://bit.ly/wamrsupatminshb4
+"""
         elif invoice:
             message = f"""
             Kepada Yth. Orang Tua/Wali Murid *{row['customer_name']}* (Kelas *{row['Grade']}*),
-            Kami hendak menyampaikan info mengenai:
-            • *Subject:* {row['Subject']}
-            • *Batas Tanggal Pembayaran:* {row['expired_date']}
-            • *Sebesar:* Rp. {row['trx_amount']:,.2f}
-            • Pembayaran via nomor *virtual account* (VA) BNI/Bank: *{row['virtual_account']}*
-        Terima kasih atas kerjasamanya.
-        Admin Sekolah
-        Jika ada pertanyaan atau hendak konfirmasi dapat menghubungi:
-            • Ibu Penna (Kasir): https://bit.ly/mspennashb
-            • Bapak Supatmin (Admin SMP & SMA): https://bit.ly/wamrsupatminshb4
-            """
+Kami hendak menyampaikan info mengenai:
+ • *Subject:* {row['Subject']}
+ • *Batas Tanggal Pembayaran:* {row['expired_date']}
+ • *Sebesar:* Rp. {row['trx_amount']:,.2f}
+ • Pembayaran via nomor *virtual account* (VA) BNI/Bank: *{row['virtual_account']}*
+Terima kasih atas kerjasamanya.
+Admin Sekolah
+
+Jika ada pertanyaan atau hendak konfirmasi dapat menghubungi:
+ • Ibu Penna (Kasir): https://bit.ly/mspennashb
+ • Bapak Supatmin (Admin SMP & SMA): https://bit.ly/wamrsupatminshb4
+"""
         elif proof_payment:
             message = f"""
             Kepada Yth. Orang Tua/Wali Murid *{row['Nama_Siswa']}* (Kelas *{row['Grade']}*),
-            Kami hendak menyampaikan info mengenai SPP:
-            • *SPP yang sedang berjalan:* {row['bulan_berjalan']:,.2f} ({row['Ket_1']})
-            • *Denda:* {row['Denda']:,.2f} ({row['Ket_3']})
-            • *SPP bulan-bulan sebelumnya:* {row['SPP_30hari']:,.2f} ({row['Ket_2']})
-            • *Keterangan:* {row['Ket_4']}
-            • *Total tagihan:* {row['Total']:,.2f}
-            Terima kasih atas kerjasamanya.
-            Admin Sekolah
+Kami hendak menyampaikan info mengenai SPP:
+ • *SPP yang sedang berjalan:* Rp {row['bulan_berjalan']:,.2f} ({row['Ket_1']})
+ • *Denda:* Rp {row['Denda']:,.2f} ({row['Ket_3']})
+ • *SPP bulan-bulan sebelumnya:* Rp {row['SPP_30hari']:,.2f} ({row['Ket_2']})
+ • *Keterangan:* {row['Ket_4']}
+ • Total tagihan: Rp *{row['Total']:,.2f}*
+Terima kasih atas kerjasamanya.
+Admin Sekolah
             
-            Jika ada pertanyaan atau hendak konfirmasi dapat menghubungi:
-            • Ibu Penna (Kasir): https://bit.ly/mspennashb
-            • Bapak Supatmin (Admin SMP & SMA): https://bit.ly/wamrsupatminshb4
-            """
+Jika ada pertanyaan atau hendak konfirmasi dapat menghubungi:
+ • Ibu Penna (Kasir): https://bit.ly/mspennashb
+ • Bapak Supatmin (Admin SMP & SMA): https://bit.ly/wamrsupatminshb4
+ """
         else:
             continue
 
