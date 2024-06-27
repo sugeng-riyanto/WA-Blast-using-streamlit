@@ -1,4 +1,16 @@
+import os
+from pyvirtualdisplay import Display
+
+# Start a virtual display
+display = Display(visible=0, size=(1024, 768))
+display.start()
+
+# Now you can import your modules
+import pywhatkit as kit
+import pyautogui as pg
+# Your Streamlit code
 import streamlit as st
+
 import pandas as pd
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -8,8 +20,8 @@ import pywhatkit as kit
 import time
 import warnings
 import webbrowser
-import pyautogui
-import os
+
+
 
 # Suppress specific warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
